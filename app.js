@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require('path')
+// const path = require('path')
 const helmet = require('helmet')
 const cors = require('cors')
 const logger = require('morgan')
@@ -9,8 +9,8 @@ const { apiLimit, jsonLimit } = require('./config/rate-limit.json')
 const { HttpCode } = require('./helpers/constants')
 require('dotenv').config()
 
-const authRouter = require('./routes/api/auth/index')
-// const usersRouter = require("./routes/users");
+const authRouter = require('./routes/api/auth')
+const usersRouter = require('./routes/api/users')
 
 const app = express()
 
@@ -26,7 +26,7 @@ app.use(express.json({ limit: jsonLimit }))
 // app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/auth', authRouter)
-// app.use("/users", usersRouter);
+app.use('/users', usersRouter)
 
 app.use(
   '/',
