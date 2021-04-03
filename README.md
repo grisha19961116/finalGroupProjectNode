@@ -58,6 +58,5 @@
 
 - Получает из строки запроса параметр verificationToken
 - Обрабатывает переход по ссылке верификации из письма
-- Сбрасывает verificationToken
-- При положительном результате возвращает ответ `Status: 200 OK, "Verification successful!"`
+- При положительном результате возвращает ответ `Status: 200 OK, "Verification successful!"` и сбрасывает verificationToken
 - В противном случае возвращает `Status: 400 BAD_REQUEST, "Your verification token is not valid"`
