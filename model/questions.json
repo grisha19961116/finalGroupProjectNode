@@ -1,0 +1,36 @@
+{
+"technical": [
+  {
+    "question": "How many testing principles are there?",
+    "questionId": 1,
+    "answers": ["5", "6", "7", "8", "9", "I don't know"],
+    "rightAnswer": "7"
+  },
+  {
+   "question": "Verification is – ",
+    "questionId": 2,
+    "answers": [
+      "In fact, it answers the question of whether the software is created and tested correctly and whether all the requirements are taken into account",
+      "During the verification process, we make sure that all the created application functionality works correctly and logically, right",
+      "The verification structure includes such components as verification of validated requirements, technical documentation and correct execution of program code at any stage of software development and testing",
+      "Options 2 and 3 are correct",
+      "All options are correct",
+      "All options are incorrect"
+    ],
+    "rightAnswer": "All options are correct"
+  },
+  {
+    "question": "Validation is – ",
+    "questionId": 3,
+    "answers": [
+      "Answers the question whether the product is being created correctly in terms of customer expectations",
+      "During the validation process, we make sure that the product fully complies with the behavior that is expected of it and that the client knows about the presence of such functionality",
+      "Validation, in its essence, largely includes an overall assessment of the software and can be based solely on subjective opinion regarding the correct operation of the application or its components",
+      "Options 1 and 3 are correct",
+      "All options are correct",
+      "All options are incorrect"
+    ],
+    "rightAnswer": "All options are correct"
+  }
+  ]
+}
