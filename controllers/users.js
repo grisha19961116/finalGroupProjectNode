@@ -11,6 +11,31 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
+const postTechnic = async (req, res, next) => {
+  try {
+  } catch (e) {
+    next(e)
+  }
+}
+const postPractice = async (req, res, next) => {
+  try {
+  } catch (e) {
+    next(e)
+  }
+}
+const getTechnicResult = async (req, res, next) => {
+  try {
+  } catch (e) {
+    next(e)
+  }
+}
+
+const getPracticeResult = async (req, res, next) => {
+  try {
+  } catch (e) {
+    next(e)
+  }
+}
 const uploadCloud = promisify(cloudinary.uploader.upload)
 
 // const updateUser = async (req, res, next) => {
@@ -150,6 +175,10 @@ const saveAvatarToCloud = async (req) => {
 }
 
 module.exports = {
+  postTechnic,
+  postPractice,
+  getTechnicResult,
+  getPracticeResult,
   getCurrent,
   avatars,
   verify,
