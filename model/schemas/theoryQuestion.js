@@ -13,6 +13,6 @@ const theoryQuestionSchema = new Schema(
   }
 )
 
-const TheoryQuestion = model('theoryQuestion', theoryQuestionSchema)
+const TheoryQuestion = model('theory-question', theoryQuestionSchema)
 
 module.exports = TheoryQuestion

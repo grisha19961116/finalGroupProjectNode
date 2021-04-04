@@ -13,6 +13,6 @@ const techQuestionSchema = new Schema(
   }
 )
 
-const TechQuestion = model('techQuestion', techQuestionSchema)
+const TechQuestion = model('tech-question', techQuestionSchema)
 
 module.exports = TechQuestion

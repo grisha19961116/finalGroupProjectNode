@@ -1,10 +1,12 @@
 const TechQuestion = require('./schemas/techQuestion')
 const TheoryQuestion = require('./schemas/theoryQuestion')
 
-const randomizeQuestions = (length) => {
-  // const randomIdNumber = Math.floor(Math.random() * length)
+const questionsAmount = 12
+
+const randomizeQuestions = async (model) => {
+  const length = await model.find().countDocuments()
   const arr = []
-  while (arr.length < 12) {
+  while (arr.length < questionsAmount) {
     const randomNumber = Math.floor(Math.random() * length) + 1
     if (arr.indexOf(randomNumber) > -1) continue
     arr[arr.length] = randomNumber
@@ -14,29 +16,23 @@ const randomizeQuestions = (length) => {
 }
 
 const listTechQuestions = async () => {
-  const randomizedQuestionsQueryArr = randomizeQuestions(25)
-  // const questions = await TechQuestions.find({
-  //   questionId: randomizedQuestionsQueryArr,
-  // })
+  const randomizedQuestionsQueryArr = await randomizeQuestions(TechQuestion)
 
-  const questions = await TechQuestion.find({})
-  // .where('questionId')
-  // .in(randomizedQuestionsQueryArr)
+  const questions = await TechQuestion.find()
+    .where('questionId')
+    .in(randomizedQuestionsQueryArr)
+    .select('questionId question answers')
   return questions
 }
 
-const listTheoryQuestions = async ({
-  // filter,
-  limit = '12',
-  offset = '0',
-}) => {
-  const result = await TheoryQuestion.paginate({
-    limit,
-    offset,
-    // select: filter ? filter.split('|').join(' ') : '',
-  })
-  const { docs: contacts, totalDocs: total } = result
-  return { total: total.toString(), limit, offset, contacts }
+const listTheoryQuestions = async () => {
+  const randomizedQuestionsQueryArr = await randomizeQuestions(TheoryQuestion)
+
+  const questions = await TheoryQuestion.find()
+    .where('questionId')
+    .in(randomizedQuestionsQueryArr)
+    .select('questionId question answers')
+  return questions
 }
 
 module.exports = { listTechQuestions, listTheoryQuestions }
