@@ -4,13 +4,13 @@ const helmet = require('helmet')
 const cors = require('cors')
 const logger = require('morgan')
 const rateLimit = require('express-rate-limit')
-// const cookieParser = require("cookie-parser");
 const { apiLimit, jsonLimit } = require('./config/rate-limit.json')
 const { HttpCode } = require('./helpers/constants')
 require('dotenv').config()
 
 const authRouter = require('./routes/api/auth')
 const usersRouter = require('./routes/api/users')
+const testingRouter = require('./routes/api/testing')
 
 const app = express()
 
@@ -22,11 +22,11 @@ app.use(helmet())
 app.use(express.json({ limit: jsonLimit }))
 
 // app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/auth', authRouter)
 app.use('/users', usersRouter)
+app.use('/test', testingRouter)
 
 app.use(
   '/',

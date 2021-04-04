@@ -12,7 +12,6 @@
     "@sendgrid/mail": "7.4.2",
     "bcryptjs": "2.4.3",
     "cloudinary": "1.25.0",
-    "cookie-parser": "~1.4.4",
     "jsonwebtoken": "8.5.1",
     "cors": "^2.8.5",
     "cross-env": "7.0.3",
