@@ -5,6 +5,10 @@ const gravatar = require('gravatar')
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      default: null,
+    },
     email: {
       type: String,
       required: [true, 'Email is required!'],

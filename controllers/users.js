@@ -11,66 +11,40 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-const postTechnic = async (req, res, next) => {
-  try {
-  } catch (e) {
-    next(e)
-  }
-}
-const postPractice = async (req, res, next) => {
-  try {
-  } catch (e) {
-    next(e)
-  }
-}
-const getTechnicResult = async (req, res, next) => {
-  try {
-  } catch (e) {
-    next(e)
-  }
-}
-
-const getPracticeResult = async (req, res, next) => {
-  try {
-  } catch (e) {
-    next(e)
-  }
-}
 const uploadCloud = promisify(cloudinary.uploader.upload)
 
-// const updateUser = async (req, res, next) => {
-//   try {
-//     const { subscription } = req.body
-//     const { id } = req.user
-// const user = await updateByField({ _id: id }, { subscription })
-//     const user = await updateUserSubscription(id, subscription)
-//     return res.status(HttpCode.OK).json({
-//       status: 'success',
-//       code: HttpCode.OK,
-//       data: {
-//         user: {
-//           email: user.email,
-//           subscription: user.subscription,
-//         },
-//       },
-//     })
-//   } catch (e) {
-//     next(e)
-//   }
-// }
+const updateUser = async (req, res, next) => {
+  try {
+    const { name } = req.body
+    const { id } = req.user
+    const user = await updateByField({ _id: id }, { name })
+    return res.status(HttpCode.OK).json({
+      status: 'success',
+      code: HttpCode.OK,
+      data: {
+        user: {
+          name: user.name,
+          email: user.email,
+          subscription: user.subscription,
+        },
+      },
+    })
+  } catch (e) {
+    next(e)
+  }
+}
 
 const getCurrent = async (req, res, next) => {
   try {
     const token = req.get('Authorization')?.split(' ')[1]
     const user = await findByField({ token })
-    // const userId = req.user.id
-    // const user = await findByField({ _id: userId })
     if (user) {
       return res.status(HttpCode.OK).json({
         status: 'success',
         code: HttpCode.OK,
         data: {
           user: {
+            name: user.name,
             email: user.email,
             subscription: user.subscription,
             avatarURL: user.avatarURL,
@@ -175,10 +149,7 @@ const saveAvatarToCloud = async (req) => {
 }
 
 module.exports = {
-  postTechnic,
-  postPractice,
-  getTechnicResult,
-  getPracticeResult,
+  updateUser,
   getCurrent,
   avatars,
   verify,

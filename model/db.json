@@ -20,6 +20,19 @@
       ],
       "rightAnswer": "All options are correct"
     },
+    {
+      "question": "Validation is – ",
+      "questionId": 3,
+      "answers": [
+        "Answers the question whether the product is being created correctly in terms of customer expectations",
+        "During the validation process, we make sure that the product fully complies with the behavior that is expected of it and that the client knows about the presence of such functionality",
+        "Validation, in its essence, largely includes an overall assessment of the software and can be based solely on subjective opinion regarding the correct operation of the application or its components",
+        "Options 1 and 3 are correct",
+        "All options are correct",
+        "All options are incorrect"
+      ],
+      "rightAnswer": "All options are correct"
+    },
 
     {
       "question": "Which of the following is a MINUS in the Waterfall method?",
@@ -37,8 +50,7 @@
     },
 
     {
-      "question":
-      "THIS software development methodology is mainly aimed at reducing the work being done at the moment. In this methodology: there are no time limits for either tasks or sprints; there are more and fewer tasks; There is no direct need to set deadlines for completing tasks, but you still need to measure them for a general presentation. What methodology are we talking about?",
+      "question": "THIS software development methodology is mainly aimed at reducing the work being done at the moment. In this methodology: there are no time limits for either tasks or sprints; there are more and fewer tasks; There is no direct need to set deadlines for completing tasks, but you still need to measure them for a general presentation. What methodology are we talking about?",
       "questionId": 5,
       "answers": [
         "Waterfall",
@@ -80,8 +92,7 @@
     },
 
     {
-      "question":
-      "What methodology are these 4 stages about: Inception, Elaboration, Construction, Transition",
+      "question": "What methodology are these 4 stages about: Inception, Elaboration, Construction, Transition",
       "questionId": 8,
       "answers": [
         "RUP",
@@ -161,8 +172,7 @@
         "This is testing with different inputs and validation of the results.",
         "I don't know"
       ],
-      "rightAnswer":
-      "This is testing by executing a code or program with different input values and confirming the results"
+      "rightAnswer": "This is testing by executing a code or program with different input values and confirming the results"
     },
 
     {
@@ -174,13 +184,11 @@
         "Verification of software, according to test procedures and relevant documentation, without taking into account the wishes of the client",
         "I don't know"
       ],
-      "rightAnswer":
-      "Verification of software, according to the test plan, test procedures and relevant documentation, taking into account the wishes of the client"
+      "rightAnswer": "Verification of software, according to the test plan, test procedures and relevant documentation, taking into account the wishes of the client"
     },
 
     {
-      "question":
-      "The usability of the interface is usually determined through a number of qualitative indicators",
+      "question": "The usability of the interface is usually determined through a number of qualitative indicators",
       "questionId": 15,
       "answers": [
         "Learnability, efficiency, errors, satisfaction",
@@ -279,8 +287,7 @@
     },
 
     {
-      "question":
-      "This is a comprehensive user testing of concurrent access to an application to verify the impact on a code, module or database. Mainly detects deadlocks in code.",
+      "question": "This is a comprehensive user testing of concurrent access to an application to verify the impact on a code, module or database. Mainly detects deadlocks in code.",
       "questionId": 22,
       "answers": [
         "Currency testing",
@@ -294,8 +301,7 @@
     },
 
     {
-      "question":
-      "This testing is done on the website to check loading, performance, security, functionality, interface, compatibility and other usability related issues",
+      "question": "This testing is done on the website to check loading, performance, security, functionality, interface, compatibility and other usability related issues",
       "questionId": 23,
       "answers": [
         "Currency testing",
@@ -309,8 +315,7 @@
     },
 
     {
-      "question":
-      "Item testing (or side testing) allows you to test individual work of source code units",
+      "question": "Item testing (or side testing) allows you to test individual work of source code units",
       "questionId": 24,
       "answers": [
         "Currency testing",
@@ -324,8 +329,7 @@
     },
 
     {
-      "question":
-      "Interface testing checks the interaction of individual modules. Most often used to test the user interface of GUI applications",
+      "question": "Interface testing checks the interaction of individual modules. Most often used to test the user interface of GUI applications",
       "questionId": 25,
       "answers": [
         "Currency testing",
@@ -339,8 +343,7 @@
     },
 
     {
-      "question":
-      "This testing is carried out when the software is already ready for release, it is checked for compliance with the requirements.",
+      "question": "This testing is carried out when the software is already ready for release, it is checked for compliance with the requirements.",
       "questionId": 26,
       "answers": [
         "Currency testing",
@@ -377,8 +380,7 @@
         "Requirements Management - Product Analysis - Developing a Test Strategy and Planning Quality Control Procedures - Generating Test Documentation - Prototype Testing - Stabilization - Basic Testing - Operation",
         "Requirements Management - Product Analysis - Developing a Test Strategy and Planning Quality Control Procedures - Prototype Testing - Generating Test Documentation - Basic Testing - Stabilization - Operation"
       ],
-      "rightAnswer":
-      "Product analysis - Working with requirements -. Developing a test strategy and planning quality control procedures - Creating test documentation - Prototype testing - Basic testing - Stabilization - Operation"
+      "rightAnswer": "Product analysis - Working with requirements -. Developing a test strategy and planning quality control procedures - Creating test documentation - Prototype testing - Basic testing - Stabilization - Operation"
     },
 
     {
@@ -423,18 +425,22 @@
     },
 
     {
-      "question":
-      "Most often, viewing elements in the Google Chrome browser on windows is launched by the button",
+      "question": "Most often, viewing elements in the Google Chrome browser on windows is launched by the button",
       "questionId": 6,
       "answers": ["F5", "F7", "F2", "F9", "F12"],
       "rightAnswer": "F12"
     },
 
     {
-      "question":
-      "Most often, viewing items in the Google Chrome browser on Mac is launched by this key combination",
+      "question": "Most often, viewing items in the Google Chrome browser on Mac is launched by this key combination",
       "questionId": 7,
-      "answers": ["Cmd+Opt+O", "Cmd+Opt+R", "Cmd+Opt+J", "Cmd+Opt+N", "Cmd+Opt+W"],
+      "answers": [
+        "Cmd+Opt+O",
+        "Cmd+Opt+R",
+        "Cmd+Opt+J",
+        "Cmd+Opt+N",
+        "Cmd+Opt+W"
+      ],
       "rightAnswer": "Cmd+Opt+J"
     },
 
@@ -448,8 +454,7 @@
         "Allows the user to open a new window in the browser and follow the specified URL",
         "There is no such command"
       ],
-      "rightAnswer":
-      "Returns the user to the previous page from the browser history"
+      "rightAnswer": "Returns the user to the previous page from the browser history"
     },
 
     {
@@ -462,8 +467,7 @@
         "Allows the user to open a new window in the browser and follow the specified URL",
         "There is no such command"
       ],
-      "rightAnswer":
-      "Allows the user to navigate to the next page according to the browser history"
+      "rightAnswer": "Allows the user to navigate to the next page according to the browser history"
     },
 
     {
@@ -489,8 +493,7 @@
         "Allows the user to open a new window in the browser and follow the specified URL",
         "There is no such command"
       ],
-      "rightAnswer":
-      "Allows the user to open a new window in the browser and follow the specified URL"
+      "rightAnswer": "Allows the user to open a new window in the browser and follow the specified URL"
     },
 
     {
@@ -508,8 +511,7 @@
     },
 
     {
-      "question":
-      "Testing that deals with the security of the application and aims to prevent problems that could affect the integrity and stability of the application:",
+      "question": "Testing that deals with the security of the application and aims to prevent problems that could affect the integrity and stability of the application:",
       "questionId": 13,
       "answers": [
         "Penetration testing",
@@ -523,8 +525,7 @@
     },
 
     {
-      "question":
-      "______ is an existing defect that has not yet caused the failure because the conditions required to trigger the defect are not met",
+      "question": "______ is an existing defect that has not yet caused the failure because the conditions required to trigger the defect are not met",
       "questionId": 14,
       "answers": [
         "Hidden defect and disguised defect",
@@ -552,8 +553,7 @@
     },
 
     {
-      "question":
-      "The tester runs a test to evaluate whether it meets the user's request to fill in a specific field using a drop-down list containing a list of values. The tester performs",
+      "question": "The tester runs a test to evaluate whether it meets the user's request to fill in a specific field using a drop-down list containing a list of values. The tester performs",
       "questionId": 16,
       "answers": [
         "Stress testing",
@@ -591,8 +591,7 @@
         "All options are correct",
         "All options are incorrent"
       ],
-      "rightAnswer":
-      "If both are running, do sanity tests first and then smoke testing"
+      "rightAnswer": "If both are running, do sanity tests first and then smoke testing"
     },
 
     {
@@ -610,8 +609,7 @@
     },
 
     {
-      "question":
-      "What kind of testing allows a tester to evaluate the software's behavior when exceptions are thrown?",
+      "question": "What kind of testing allows a tester to evaluate the software's behavior when exceptions are thrown?",
       "questionId": 20,
       "answers": [
         "Injection test malfunction",
@@ -639,8 +637,7 @@
     },
 
     {
-      "question":
-      "Which of the following is not part of specification-based testing?",
+      "question": "Which of the following is not part of specification-based testing?",
       "questionId": 22,
       "answers": [
         "State transition",
@@ -668,8 +665,7 @@
     },
 
     {
-      "question":
-      "Application does not allow the configuration expected by the client, is an example",
+      "question": "Application does not allow the configuration expected by the client, is an example",
       "questionId": 24,
       "answers": [
         "High severity and high priority",
@@ -683,8 +679,7 @@
     },
 
     {
-      "question":
-      "What is the balance of effort required to fix a defect in the requirements phase, design phase, coding phase, and implementation phase?",
+      "question": "What is the balance of effort required to fix a defect in the requirements phase, design phase, coding phase, and implementation phase?",
       "questionId": 25,
       "answers": [
         "1: 8: 12: 100",
@@ -740,8 +735,7 @@
     },
 
     {
-      "question":
-      "Upon opening a link to a website, the user receives the message 'This section of our website is under construction.'' Then what is this mistake?",
+      "question": "Upon opening a link to a website, the user receives the message 'This section of our website is under construction.'' Then what is this mistake?",
       "questionId": 29,
       "answers": [
         "URL error",
@@ -753,8 +747,7 @@
       "rightAnswer": "All options are incorrent"
     },
     {
-      "question":
-      "Is a testing technique that involves testing with different ranges of valid and invalid inputs a specific module or component functionality?",
+      "question": "Is a testing technique that involves testing with different ranges of valid and invalid inputs a specific module or component functionality?",
       "questionId": 30,
       "answers": [
         "Baseline testing",
