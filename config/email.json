@@ -1,5 +1,4 @@
 {
   "dev": "http://localhost:3000",
-  "stage": "https://contacts-stage.heroku.com",
-  "prod": "https://contacts.heroku.com"
+  "prod": "https://final-group-project-node.herokuapp.com"
 }
