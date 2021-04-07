@@ -11,10 +11,7 @@
   },
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json", "multipart/form-data"],
-  "servers": [
-    { "url": "http://localhost:3000" },
-    { "url": "https://final-group-project-node.herokuapp.com" }
-  ],
+  "servers": [{ "url": "https://final-group-project-node.herokuapp.com" }],
   "tags": [
     {
       "name": "Auth",
