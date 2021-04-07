@@ -280,10 +280,10 @@
     "/test/tech-questions": {
       "get": {
         "tags": ["Test"],
-        "summary": "User's test",
+        "summary": "User's theory test",
         "security": [{ "Bearer": [] }],
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -301,8 +301,75 @@
             "description": "FORBIDDEN",
             "content": {}
           },
-          "409": {
-            "description": "Provided email already exists",
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/test/result": {
+      "post": {
+        "tags": ["Test"],
+        "summary": "User's get result",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Data which expects server",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestResultRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/test/theory-questions": {
+      "get": {
+        "tags": ["Test"],
+        "summary": "User's theory test",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theory-questionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
             "content": {}
           },
           "500": {
@@ -491,18 +558,117 @@
             },
             {
               "answers": [
-                "In fact, it answers the question of whether the software is created and tested correctly and whether all the requirements are taken into account",
-                "During the verification process, we make sure that all the created application functionality works correctly and logically, right",
-                "The verification structure includes such components as verification of validated requirements, technical documentation and correct execution of program code at any stage of software development and testing",
-                "Options 2 and 3 are correct",
+                "High transparency of development and project phases",
+                "Stability of requirements",
+                "Facilitates the work of drawing up a project plan and assembling a project team",
+                "All requirements must be known at the beginning of the project life cycle",
+                "Clear consistency",
                 "All options are correct",
                 "All options are incorrect"
               ],
-              "_id": "6069a3f5c9834730cc77a7fd",
-              "question": "Verification is – ",
-              "questionId": 2
+              "_id": "6069a3f5c9834730cc77a7fe",
+              "question": "Which of the following is a MINUS in the Waterfall method?",
+              "questionId": 4
             }
           ]
+        }
+      },
+      "Theory-questionsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": [
+            {
+              "answers": [
+                "Fast execution",
+                "Reduced software maintenance costs",
+                "Saving testers time",
+                "Possibility of execution outside working hours",
+                "All options are correct",
+                "All options are incorrect"
+              ],
+              "_id": "6069a4fcc9834730cc77a817",
+              "question": "What are the main benefits of automated testing?",
+              "questionId": 3
+            },
+            {
+              "answers": [
+                "Cmd+Opt+O",
+                "Cmd+Opt+R",
+                "Cmd+Opt+J",
+                "Cmd+Opt+N",
+                "Cmd+Opt+W"
+              ],
+              "_id": "6069a4fcc9834730cc77a81b",
+              "question": "Most often, viewing items in the Google Chrome browser on Mac is launched by this key combination",
+              "questionId": 7
+            }
+          ]
+        }
+      },
+      "TestResultRequest": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "answers": {
+              "type": "massive",
+              "description": "Answers massive"
+            },
+            "nameTest": {
+              "type": "string",
+              "description": "Flag technic or theoretical"
+            }
+          }
+        },
+        "example": {
+          "answers": [
+            { "answerId": 1, "answer": "Continuous Integration" },
+            { "answerId": 6, "answer": "F12" },
+            { "answerId": 7, "answer": "All options are correct" },
+            { "answerId": 10, "answer": "All options are correct" },
+            { "answerId": 3, "answer": "All options are correct" },
+            { "answerId": 14, "answer": "All options are incorrect" },
+            { "answerId": 15, "answer": "All options are incorrect" },
+            { "answerId": 18, "answer": "RUP" },
+            { "answerId": 24, "answer": "All options are incorrect" },
+            { "answerId": 27, "answer": "All options are correct" },
+            { "answerId": 29, "answer": "All options are incorrect" },
+            { "answerId": 30, "answer": "All options are correct" }
+          ],
+          "nameTest": "technic"
+        }
+      },
+      "TestResultResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "nameTest": "technic",
+            "result": {
+              "1": false,
+              "2": false,
+              "3": true,
+              "4": true,
+              "6": false,
+              "7": false,
+              "8": false,
+              "9": false
+            },
+            "right": 2,
+            "wrong": 6,
+            "total": 8
+          }
         }
       }
     },
