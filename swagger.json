@@ -23,6 +23,10 @@
     {
       "name": "User",
       "description": "User endpoints"
+    },
+    {
+      "name": "Test",
+      "description": "Test endpoints"
     }
   ],
   "paths": {
@@ -272,6 +276,40 @@
           }
         }
       }
+    },
+    "/test/tech-questions": {
+      "get": {
+        "tags": ["Test"],
+        "summary": "User's test",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tech-questionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "409": {
+            "description": "Provided email already exists",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -335,20 +373,6 @@
       },
       "LoginResponse": {
         "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "password": {
-              "type": "number",
-              "description": "User's password"
-            }
-          }
-        },
         "example": {
           "status": "success",
           "code": 200,
@@ -447,6 +471,38 @@
           "data": {
             "avatarUrl": "https://res.cloudinary.com/drk4jlehk/image/upload/v1617737101/Photo/wkdcar88bft1djvwfdt7.png"
           }
+        }
+      },
+      "Tech-questionsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": [
+            {
+              "answers": ["5", "6", "7", "8", "9", "I don't know"],
+              "_id": "6069a3f5c9834730cc77a7fc",
+              "question": "How many testing principles are there?",
+              "questionId": 1
+            },
+            {
+              "answers": [
+                "In fact, it answers the question of whether the software is created and tested correctly and whether all the requirements are taken into account",
+                "During the verification process, we make sure that all the created application functionality works correctly and logically, right",
+                "The verification structure includes such components as verification of validated requirements, technical documentation and correct execution of program code at any stage of software development and testing",
+                "Options 2 and 3 are correct",
+                "All options are correct",
+                "All options are incorrect"
+              ],
+              "_id": "6069a3f5c9834730cc77a7fd",
+              "question": "Verification is – ",
+              "questionId": 2
+            }
+          ]
         }
       }
     },
