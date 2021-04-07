@@ -35,7 +35,7 @@
         "tags": ["Auth"],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
