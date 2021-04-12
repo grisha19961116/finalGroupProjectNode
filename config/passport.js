@@ -2,7 +2,7 @@ const passport = require('passport')
 const { Strategy, ExtractJwt } = require('passport-jwt')
 require('dotenv').config()
 const SECRET_KEY = process.env.JWT_SECRET_KEY
-const { findByField } = require('../model/users')
+const { findUserByField, findSession } = require('../model/users')
 
 const params = {
   secretOrKey: SECRET_KEY,
@@ -12,13 +12,18 @@ const params = {
 passport.use(
   new Strategy(params, async (payload, done) => {
     try {
-      const user = await findByField({ _id: payload.id })
+      const user = await findUserByField({ _id: payload.uid })
+      const session = await findSession(payload.sid)
+
       if (!user) {
         return done(new Error('User not found'))
       }
-      if (!user.token) {
+      if (!session) {
         return done(null, false)
       }
+
+      user.sid = payload.sid
+
       return done(null, user)
     } catch (err) {
       done(err)

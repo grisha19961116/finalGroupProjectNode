@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node --harmony ./bin/server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
     "lint": "eslint **/*.{js,json}",
     "lint:fix": "eslint --fix **/*.{js,json}"
   },
   "dependencies": {
     "@sendgrid/mail": "7.4.2",
+    "axios": "^0.21.1",
     "bcryptjs": "2.4.3",
     "cloudinary": "1.25.0",
     "cors": "^2.8.5",
@@ -30,7 +32,8 @@
     "multer": "1.4.2",
     "nanoid": "3.1.22",
     "passport": "0.4.1",
-    "passport-jwt": "4.0.0"
+    "passport-jwt": "4.0.0",
+    "query-string": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",

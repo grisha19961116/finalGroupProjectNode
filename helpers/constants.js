@@ -1,9 +1,3 @@
-const Subscription = {
-  FREE: 'free',
-  PRO: 'pro',
-  PREMIUM: 'premium',
-}
-
 const HttpCode = {
   OK: 200,
   CREATED: 201,
@@ -16,7 +10,11 @@ const HttpCode = {
   INTERNAL_SERVER_ERROR: 500,
 }
 
+const JWT_ACCESS_EXPIRE_TIME = '1h'
+const JWT_REFRESH_EXPIRE_TIME = '30d'
+
 module.exports = {
-  Subscription,
   HttpCode,
+  JWT_ACCESS_EXPIRE_TIME,
+  JWT_REFRESH_EXPIRE_TIME,
 }

@@ -34,9 +34,9 @@ class EmailService {
     const template = {
       body: {
         name,
-        intro: 'Attention',
+        intro: 'Need Verification for QA TEST WEB APP',
         action: {
-          instructions: 'To finish verification click the button:',
+          instructions: 'To finish verification click the button below:',
           button: {
             color: '#22BC66',
             text: 'Confirm your account',
@@ -56,7 +56,7 @@ class EmailService {
     const msg = {
       to: email,
       from: 'freedom277f@gmail.com',
-      subject: 'Verification',
+      subject: 'Verification profile on QA TEST WEBAPP',
       html: emailBody,
     }
     await this.#sender.send(msg)

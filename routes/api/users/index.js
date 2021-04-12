@@ -17,7 +17,7 @@ router.patch(
   '/current',
   guard,
   validation.UpdateUser,
-  usersController.updateUser
+  usersController.updateUserName
 )
 
 router.get('/verify/:verificationToken', usersController.verify)
