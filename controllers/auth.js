@@ -96,7 +96,6 @@ const login = async (req, res, next) => {
 
 const logout = async (req, res, next) => {
   try {
-    // делает Access token не валидным! А refreshToken тоже?
     await deleteSession(req.user.sid)
     // await updateUserByField({ _id: req.user.id }, { token: null })
     return res.status(HttpCode.NO_CONTENT).json({})
@@ -145,7 +144,7 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   })
-  const email = userData.data.email
+  const { email } = userData.data
   const user = await findUserByField({ email })
 
   if (!user) {
@@ -165,17 +164,11 @@ const googleRedirect = async (req, res) => {
   // await updateUserByField({ _id: user._id }, { token: accessToken })
 
   return res
-    .redirect(
-      200,
-      `${process.env.BASE_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}`
-    )
-    .send({ email })
+    .send({ email, accessToken, refreshToken })
+    .redirect(200, process.env.BASE_URL)
 }
 
 const refreshToken = async (req, res) => {
-  // Получили рефреш токен проверили валидный ли он
-  // в прослойке validate-refresh-token в рауте
-  // и теперь по нему выдаём пару новых
   await deleteSession(req.user.sid)
   const user = req.user
   const newSession = await createSession(user._id)
@@ -203,10 +196,10 @@ const refreshToken = async (req, res) => {
 }
 
 module.exports = {
-  refreshToken,
-  googleRedirect,
-  googleAuth,
   register,
   login,
   logout,
+  googleRedirect,
+  googleAuth,
+  refreshToken,
 }
