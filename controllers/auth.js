@@ -144,7 +144,7 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   })
-  const { email } = userData.data
+  const { email, name, picture } = userData.data
   const user = await findUserByField({ email })
 
   if (!user) {
@@ -163,9 +163,8 @@ const googleRedirect = async (req, res) => {
   })
   // await updateUserByField({ _id: user._id }, { token: accessToken })
 
-  return res
-    .send({ email, accessToken, refreshToken })
-    .redirect(200, process.env.BASE_URL)
+  return res.send({ email, name, picture, accessToken, refreshToken })
+  // return res.redirect(200, 'http://www.google.com')
 }
 
 const refreshToken = async (req, res) => {
