@@ -1,5 +1,7 @@
 const express = require('express')
 // const path = require('path')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
 const helmet = require('helmet')
 const cors = require('cors')
 const logger = require('morgan')
@@ -25,6 +27,8 @@ app.use(express.json({ limit: jsonLimit }))
 
 // app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, "public")));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use('/auth', authRouter)
 app.use('/users', usersRouter)

@@ -1,0 +1,680 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger test",
+    "description": "Showing off swagger-ui-express",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json", "multipart/form-data"],
+  "servers": [
+    { "url": "https://final-group-project-node.herokuapp.com" },
+    { "url": "http://localhost:3000" }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "User",
+      "description": "User endpoints"
+    },
+    {
+      "name": "Test",
+      "description": "Test endpoints"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User registration",
+        "parameters": [],
+        "security": [],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "409": {
+            "description": "Provided email already exists",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Login's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "UNAUTHORIZED",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout , send none content!",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Successful logout 204 No content",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User pull information about current user!",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {},
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentGetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user's information!",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurrentPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentPatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/users/verify": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Verification for user!",
+        "parameters": [{ "in": "path", "name": "verificationToken" }],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentGetVerification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Your verification token is not valid",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/users/avatars": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update avatar across cloudinary!",
+        "parameters": {},
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/AvatarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Your verification token is not valid",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/test/tech-questions": {
+      "get": {
+        "tags": ["Test"],
+        "summary": "User's theory test",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tech-questionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/test/result": {
+      "post": {
+        "tags": ["Test"],
+        "summary": "User's get result",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Data which expects server",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestResultRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/test/theory-questions": {
+      "get": {
+        "tags": ["Test"],
+        "summary": "User's theory test",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theory-questionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {}
+          },
+          "500": {
+            "description": "INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        },
+        "example": { "email": "qwe@qwe.com", "password": "qwe123" }
+      },
+      "RegistrationResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "password": {
+              "type": "number",
+              "description": "User's password",
+              "example": "qwe123"
+            }
+          }
+        },
+        "example": { "email": "qwe@gmail.com", "password": "qwe123" }
+      },
+      "LoginRequest": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "password": {
+              "type": "number",
+              "description": "User's password"
+            }
+          }
+        },
+        "example": {
+          "email": "grisha1996111616@gmail.com",
+          "password": "Pheonix"
+        }
+      },
+      "LoginResponse": {
+        "type": "array",
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjljY2VjMjA2NTU2Mjk3ODY1MDdlYSIsImlhdCI6MTYxNzczMjQxNCwiZXhwIjoxNjE3ODE4ODE0fQ.HZJ5ee1NazSeARNFQrJzLlMkzkjXkpWwbKCumURUVgs",
+            "user": {
+              "name": "Shara",
+              "email": "grisha1996111616@gmail.com",
+              "avatarURL": "https://res.cloudinary.com/drk4jlehk/image/upload/v1617561654/Photo/m8st0gyjbospqglbyuaa.png"
+            }
+          }
+        }
+      },
+      "CurrentGetResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "user": {
+              "name": "qgrl",
+              "email": "grisha1996111616@gmail.com",
+              "avatarURL": "https://res.cloudinary.com/drk4jlehk/image/upload/v1617561654/Photo/m8st0gyjbospqglbyuaa.png"
+            }
+          }
+        }
+      },
+      "CurrentPatchResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "user": {
+              "name": "updatedNmae",
+              "email": "grisha1996111616@gmail.com"
+            }
+          }
+        }
+      },
+      "CurrentPatchRequest": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "format": "string"
+            }
+          }
+        },
+        "example": { "name": "Heroku" }
+      },
+      "CurrentGetVerification": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": "200",
+          "message": "Verification successful!"
+        }
+      },
+      "AvatarRequest": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "AvatarResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "avatarUrl": "https://res.cloudinary.com/drk4jlehk/image/upload/v1617737101/Photo/wkdcar88bft1djvwfdt7.png"
+          }
+        }
+      },
+      "Tech-questionsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": [
+            {
+              "answers": ["5", "6", "7", "8", "9", "I don't know"],
+              "_id": "6069a3f5c9834730cc77a7fc",
+              "question": "How many testing principles are there?",
+              "questionId": 1
+            },
+            {
+              "answers": [
+                "High transparency of development and project phases",
+                "Stability of requirements",
+                "Facilitates the work of drawing up a project plan and assembling a project team",
+                "All requirements must be known at the beginning of the project life cycle",
+                "Clear consistency",
+                "All options are correct",
+                "All options are incorrect"
+              ],
+              "_id": "6069a3f5c9834730cc77a7fe",
+              "question": "Which of the following is a MINUS in the Waterfall method?",
+              "questionId": 4
+            }
+          ]
+        }
+      },
+      "Theory-questionsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": [
+            {
+              "answers": [
+                "Fast execution",
+                "Reduced software maintenance costs",
+                "Saving testers time",
+                "Possibility of execution outside working hours",
+                "All options are correct",
+                "All options are incorrect"
+              ],
+              "_id": "6069a4fcc9834730cc77a817",
+              "question": "What are the main benefits of automated testing?",
+              "questionId": 3
+            },
+            {
+              "answers": [
+                "Cmd+Opt+O",
+                "Cmd+Opt+R",
+                "Cmd+Opt+J",
+                "Cmd+Opt+N",
+                "Cmd+Opt+W"
+              ],
+              "_id": "6069a4fcc9834730cc77a81b",
+              "question": "Most often, viewing items in the Google Chrome browser on Mac is launched by this key combination",
+              "questionId": 7
+            }
+          ]
+        }
+      },
+      "TestResultRequest": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "answers": {
+              "type": "massive",
+              "description": "Answers massive"
+            },
+            "nameTest": {
+              "type": "string",
+              "description": "Flag technic or theoretical"
+            }
+          }
+        },
+        "example": {
+          "answers": [
+            { "answerId": 1, "answer": "Continuous Integration" },
+            { "answerId": 6, "answer": "F12" },
+            { "answerId": 7, "answer": "All options are correct" },
+            { "answerId": 10, "answer": "All options are correct" },
+            { "answerId": 3, "answer": "All options are correct" },
+            { "answerId": 14, "answer": "All options are incorrect" },
+            { "answerId": 15, "answer": "All options are incorrect" },
+            { "answerId": 18, "answer": "RUP" },
+            { "answerId": 24, "answer": "All options are incorrect" },
+            { "answerId": 27, "answer": "All options are correct" },
+            { "answerId": 29, "answer": "All options are incorrect" },
+            { "answerId": 30, "answer": "All options are correct" }
+          ],
+          "nameTest": "technic"
+        }
+      },
+      "TestResultResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "nameTest": "technic",
+            "result": {
+              "1": false,
+              "2": false,
+              "3": true,
+              "4": true,
+              "6": false,
+              "7": false,
+              "8": false,
+              "9": false
+            },
+            "right": 2,
+            "wrong": 6,
+            "total": 8
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

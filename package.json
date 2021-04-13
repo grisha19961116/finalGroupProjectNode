@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --harmony ./bin/server.js",
+    "start": "cross-env NODE_ENV=production node ./bin/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
     "lint": "eslint **/*.{js,json}",
     "lint:fix": "eslint --fix **/*.{js,json}"
@@ -34,6 +34,8 @@
     "passport": "0.4.1",
     "passport-jwt": "4.0.0",
     "query-string": "^7.0.0"
+    "swagger-ui-express": "^4.1.6"
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
