@@ -11,7 +11,7 @@ const randomizeQuestions = async (model) => {
     if (arr.indexOf(randomNumber) > -1) continue
     arr[arr.length] = randomNumber
   }
-
+  console.log(arr.length)
   return arr
 }
 
@@ -25,10 +25,6 @@ const listTechQuestions = async () => {
   return questions
 }
 
-const listAnswersTechQuestions = async () => {
-  const questions = await TechQuestion.find()
-  return questions
-}
 const listTheoryQuestions = async () => {
   const randomizedQuestionsQueryArr = await randomizeQuestions(TheoryQuestion)
 
@@ -41,6 +37,10 @@ const listTheoryQuestions = async () => {
 
 const listAnswersTheoryQuestions = async () => {
   const questions = await TheoryQuestion.find()
+  return questions
+}
+const listAnswersTechQuestions = async () => {
+  const questions = await TechQuestion.find()
   return questions
 }
 

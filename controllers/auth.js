@@ -29,9 +29,7 @@ const register = async (req, res, next) => {
       status: 'success',
       code: HttpCode.CREATED,
       data: {
-        id: newUser.id,
         email: newUser.email,
-        subscription: newUser.subscription,
         avatar: newUser.avatarURL,
       },
     })
