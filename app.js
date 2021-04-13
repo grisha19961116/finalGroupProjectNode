@@ -6,6 +6,8 @@ const helmet = require('helmet')
 const cors = require('cors')
 const logger = require('morgan')
 const rateLimit = require('express-rate-limit')
+// const swaggerUi = require('swagger-ui-express')
+// const swaggerDocument = require('../../swagger.json')
 const { apiLimit, jsonLimit } = require('./config/rate-limit.json')
 const { HttpCode } = require('./helpers/constants')
 require('dotenv').config()
@@ -31,6 +33,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/auth', authRouter)
 app.use('/users', usersRouter)
 app.use('/test', testingRouter)
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use(
   '/',

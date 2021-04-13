@@ -660,11 +660,14 @@
               "6": false,
               "7": false,
               "8": false,
-              "9": false
+              "9": false,
+              "10": true,
+              "11": true,
+              "12": false
             },
-            "right": 2,
-            "wrong": 6,
-            "total": 8
+            "right": 4,
+            "wrong": 8,
+            "total": 12
           }
         }
       }

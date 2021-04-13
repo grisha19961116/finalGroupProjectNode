@@ -1,7 +1,6 @@
 const TechQuestion = require('./schemas/techQuestion')
 const TheoryQuestion = require('./schemas/theoryQuestion')
-
-const questionsAmount = 12
+const { questionsAmount } = require('./../helpers/constants')
 
 const randomizeQuestions = async (model) => {
   const length = await model.find().countDocuments()
@@ -25,10 +24,6 @@ const listTechQuestions = async () => {
   return questions
 }
 
-const listAnswersTechQuestions = async () => {
-  const questions = await TechQuestion.find()
-  return questions
-}
 const listTheoryQuestions = async () => {
   const randomizedQuestionsQueryArr = await randomizeQuestions(TheoryQuestion)
 
@@ -41,6 +36,10 @@ const listTheoryQuestions = async () => {
 
 const listAnswersTheoryQuestions = async () => {
   const questions = await TheoryQuestion.find()
+  return questions
+}
+const listAnswersTechQuestions = async () => {
+  const questions = await TechQuestion.find()
   return questions
 }
 
