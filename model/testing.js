@@ -1,7 +1,6 @@
 const TechQuestion = require('./schemas/techQuestion')
 const TheoryQuestion = require('./schemas/theoryQuestion')
-
-const questionsAmount = 12
+const { questionsAmount } = require('./../helpers/constants')
 
 const randomizeQuestions = async (model) => {
   const length = await model.find().countDocuments()
@@ -11,7 +10,7 @@ const randomizeQuestions = async (model) => {
     if (arr.indexOf(randomNumber) > -1) continue
     arr[arr.length] = randomNumber
   }
-  console.log(arr.length)
+
   return arr
 }
 

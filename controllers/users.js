@@ -2,7 +2,11 @@ const fs = require('fs').promises
 const { promisify } = require('util')
 const cloudinary = require('cloudinary').v2
 require('dotenv').config()
-const { updateAvatar, findByField, updateByField } = require('../model/users')
+const {
+  updateAvatar,
+  findUserByField,
+  updateUserByField,
+} = require('../model/users')
 const { HttpCode } = require('../helpers/constants')
 
 cloudinary.config({
@@ -13,11 +17,11 @@ cloudinary.config({
 
 const uploadCloud = promisify(cloudinary.uploader.upload)
 
-const updateUser = async (req, res, next) => {
+const updateUserName = async (req, res, next) => {
   try {
     const { name } = req.body
     const { id } = req.user
-    const user = await updateByField({ _id: id }, { name })
+    const user = await updateUserByField({ _id: id }, { name })
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,
@@ -25,7 +29,6 @@ const updateUser = async (req, res, next) => {
         user: {
           name: user.name,
           email: user.email,
-          subscription: user.subscription,
         },
       },
     })
@@ -36,8 +39,8 @@ const updateUser = async (req, res, next) => {
 
 const getCurrent = async (req, res, next) => {
   try {
-    const token = req.get('Authorization')?.split(' ')[1]
-    const user = await findByField({ token })
+    // const token = req.get('Authorization')?.split(' ')[1]
+    const user = req.user
     if (user) {
       return res.status(HttpCode.OK).json({
         status: 'success',
@@ -46,7 +49,6 @@ const getCurrent = async (req, res, next) => {
           user: {
             name: user.name,
             email: user.email,
-            subscription: user.subscription,
             avatarURL: user.avatarURL,
           },
         },
@@ -66,7 +68,7 @@ const avatars = async (req, res, next) => {
   try {
     const id = req.user.id
     // const avatarURL = await saveAvatarToStatic(req)
-    // await updateByField((_id: id}, {avatarURL})
+    // await updateUserByField((_id: id}, {avatarURL})
     const {
       public_id: avatarIdCloud,
       secure_url: avatarUrl,
@@ -87,9 +89,9 @@ const avatars = async (req, res, next) => {
 const verify = async (req, res, next) => {
   try {
     const { verificationToken } = req.params
-    const user = await findByField({ verificationToken })
+    const user = await findUserByField({ verificationToken })
     if (user) {
-      await updateByField({ _id: user.id }, { verificationToken: null })
+      await updateUserByField({ _id: user.id }, { verificationToken: null })
       return res.json({
         status: 'success',
         code: HttpCode.OK,
@@ -149,7 +151,7 @@ const saveAvatarToCloud = async (req) => {
 }
 
 module.exports = {
-  updateUser,
+  updateUserName,
   getCurrent,
   avatars,
   verify,

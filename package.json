@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "7.4.2",
+    "axios": "^0.21.1",
     "bcryptjs": "2.4.3",
     "cloudinary": "1.25.0",
     "cors": "^2.8.5",
@@ -32,7 +33,9 @@
     "nanoid": "3.1.22",
     "passport": "0.4.1",
     "passport-jwt": "4.0.0",
+    "query-string": "^7.0.0"
     "swagger-ui-express": "^4.1.6"
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
