@@ -104,7 +104,10 @@ const logout = async (req, res, next) => {
   }
 }
 
+// let originUrl = null
+
 const googleAuth = async (req, res) => {
+  // originUrl = req.headers.origin
   const stringifiedParams = queryString.stringify({
     client_id: process.env.GOOGLE_CLIENT_ID,
     redirect_uri: `${process.env.BASE_URL}/auth/google-redirect`,
@@ -163,9 +166,13 @@ const googleRedirect = async (req, res) => {
   })
   // await updateUserByField({ _id: user._id }, { token: accessToken })
 
-  return res.send({ email, name, picture, accessToken, refreshToken })
-  // return res.redirect(200, 'http://www.google.com')
+  // return res.send({ email, name, picture, accessToken, refreshToken })
+  return res.redirect(
+     `${урл вашего фронта. например нетлифай}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${picture}`
+  )
 }
+
+
 
 const refreshToken = async (req, res) => {
   await deleteSession(req.user.sid)
