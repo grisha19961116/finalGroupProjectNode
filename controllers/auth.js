@@ -168,11 +168,9 @@ const googleRedirect = async (req, res) => {
 
   // return res.send({ email, name, picture, accessToken, refreshToken })
   return res.redirect(
-     `${урл вашего фронта. например нетлифай}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${picture}`
+    `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${picture}`
   )
 }
-
-
 
 const refreshToken = async (req, res) => {
   await deleteSession(req.user.sid)

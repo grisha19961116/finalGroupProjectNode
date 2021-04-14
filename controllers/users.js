@@ -92,11 +92,12 @@ const verify = async (req, res, next) => {
     const user = await findUserByField({ verificationToken })
     if (user) {
       await updateUserByField({ _id: user.id }, { verificationToken: null })
-      return res.json({
-        status: 'success',
-        code: HttpCode.OK,
-        message: 'Verification successful!',
-      })
+      //  return res.json({
+      //    status: 'success',
+      //    code: HttpCode.OK,
+      //    message: 'Verification successful!',
+      //  })
+      return res.redirect(process.env.FRONT_URL)
     }
     next(
       res.status(HttpCode.BAD_REQUEST).json({
