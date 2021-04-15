@@ -164,10 +164,10 @@ const googleRedirect = async (req, res) => {
     expiresIn: JWT_REFRESH_EXPIRE_TIME,
   })
   // await updateUserByField({ _id: user._id }, { token: accessToken })
-
+  const userPicture = user.avatarURL && picture
   // return res.send({ email, name, picture, accessToken, refreshToken })
   return res.redirect(
-    `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${picture}`
+    `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${userPicture}`
   )
 }
 
