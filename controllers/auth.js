@@ -51,6 +51,18 @@ const register = async (req, res, next) => {
   }
 }
 
+async function createSessionTokens(userId) {
+  const newSession = await createSession(userId)
+  const payload = { uid: userId, sid: newSession._id }
+  const accessToken = jwt.sign(payload, SECRET_KEY, {
+    expiresIn: JWT_ACCESS_EXPIRE_TIME,
+  })
+  const refreshToken = jwt.sign(payload, SECRET_KEY, {
+    expiresIn: JWT_REFRESH_EXPIRE_TIME,
+  })
+  return { accessToken, refreshToken }
+}
+
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body
@@ -66,16 +78,15 @@ const login = async (req, res, next) => {
           : 'Email or password is wrong',
       })
     }
-    const id = user._id
-    const newSession = await createSession(id)
-    const payload = { uid: id, sid: newSession._id }
-    const accessToken = jwt.sign(payload, SECRET_KEY, {
-      expiresIn: JWT_ACCESS_EXPIRE_TIME,
-    })
-    const refreshToken = jwt.sign(payload, SECRET_KEY, {
-      expiresIn: JWT_REFRESH_EXPIRE_TIME,
-    })
-    // await updateUserByField({ _id: id }, { token })
+    const { accessToken, refreshToken } = createSessionTokens(user._id)
+    // const newSession = await createSession(user._id)
+    // const payload = { uid:user._id, sid: newSession._id }
+    // const accessToken = jwt.sign(payload, SECRET_KEY, {
+    //   expiresIn: JWT_ACCESS_EXPIRE_TIME,
+    // })
+    // const refreshToken = jwt.sign(payload, SECRET_KEY, {
+    //   expiresIn: JWT_REFRESH_EXPIRE_TIME,
+    // })
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,
@@ -97,7 +108,7 @@ const login = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     await deleteSession(req.user.sid)
-    // await updateUserByField({ _id: req.user.id }, { token: null })
+
     return res.status(HttpCode.NO_CONTENT).json({})
   } catch (e) {
     next(e)
@@ -105,7 +116,6 @@ const logout = async (req, res, next) => {
 }
 
 // let originUrl = null
-
 const googleAuth = async (req, res) => {
   // originUrl = req.headers.origin
   const stringifiedParams = queryString.stringify({
@@ -140,6 +150,7 @@ const googleRedirect = async (req, res) => {
       code,
     },
   })
+
   const userData = await axios({
     url: 'https://www.googleapis.com/oauth2/v2/userinfo',
     method: 'get',
@@ -147,42 +158,34 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   })
-  const { email, name, picture } = userData.data
+  const { email, name, picture, id } = userData.data
   const user = await findUserByField({ email })
 
   if (!user) {
-    return res.status(403).send({
-      message: 'You should register from front-end first',
+    const newUser = await create({
+      email,
+      verificationToken: null,
+      password: id,
     })
+    const { accessToken, refreshToken } = await createSessionTokens(newUser._id)
+
+    const userPicture = picture || newUser.avatarURL
+    return res.redirect(
+      `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${userPicture}`
+    )
   }
+  const { accessToken, refreshToken } = createSessionTokens(user._id)
 
-  const newSession = await createSession(user._id)
-  const payload = { uid: user._id, sid: newSession._id }
-  const accessToken = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: JWT_ACCESS_EXPIRE_TIME,
-  })
-  const refreshToken = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: JWT_REFRESH_EXPIRE_TIME,
-  })
-  // await updateUserByField({ _id: user._id }, { token: accessToken })
-
-  // return res.send({ email, name, picture, accessToken, refreshToken })
+  const userPicture = user.avatarURL || picture
   return res.redirect(
-    `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${picture}`
+    `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${userPicture}`
   )
 }
 
 const refreshToken = async (req, res) => {
   await deleteSession(req.user.sid)
   const user = req.user
-  const newSession = await createSession(user._id)
-  const payload = { uid: user._id, sid: newSession._id }
-  const accessToken = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: JWT_ACCESS_EXPIRE_TIME,
-  })
-  const refreshToken = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: JWT_REFRESH_EXPIRE_TIME,
-  })
+  const { accessToken, refreshToken } = createSessionTokens(user._id)
 
   return res.status(HttpCode.OK).json({
     status: 'success',

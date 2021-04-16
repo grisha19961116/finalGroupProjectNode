@@ -8,7 +8,6 @@ const {
 const getTechQuestions = async (req, res, next) => {
   try {
     const data = await listTechQuestions()
-    console.log(data)
     return res.json({ status: 'success', code: 200, data })
   } catch (e) {
     next(e)
