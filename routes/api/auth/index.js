@@ -13,6 +13,7 @@ router.post(
   validation.Register,
   authController.register
 )
+
 router.post('/login', validation.Login, authController.login)
 router.post('/logout', guard, authController.logout)
 

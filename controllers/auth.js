@@ -20,7 +20,7 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY
 
 const register = async (req, res, next) => {
   try {
-    const { email } = req.body
+    const { email, password } = req.body
     const user = await findUserByField({ email })
     if (user) {
       return res.status(HttpCode.CONFLICT).json({
@@ -34,7 +34,8 @@ const register = async (req, res, next) => {
     const emailService = new EmailService(process.env.NODE_ENV)
     await emailService.sendEmail(verificationToken, email)
     const newUser = await create({
-      ...req.body,
+      email,
+      password,
       verificationToken,
     })
     return res.status(HttpCode.CREATED).json({
