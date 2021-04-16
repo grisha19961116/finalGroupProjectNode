@@ -47,7 +47,7 @@ const getCurrent = async (req, res, next) => {
         code: HttpCode.OK,
         data: {
           user: {
-            name: user.name,
+            name: user.name !== null ? user.name : user.email,
             email: user.email,
             avatarURL: user.avatarURL,
           },
