@@ -20,7 +20,7 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY
 
 const register = async (req, res, next) => {
   try {
-    const { email , password} = req.body
+    const { email, password } = req.body
     const user = await findUserByField({ email })
     if (user) {
       return res.status(HttpCode.CONFLICT).json({
