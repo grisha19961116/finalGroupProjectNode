@@ -4,7 +4,7 @@ const sessionSchema = new Schema(
   {
     uid: {
       type: SchemaTypes.ObjectId,
-      ref: 'user',
+      // ref: 'user',
     },
   }
   // {
