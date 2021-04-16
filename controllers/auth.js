@@ -94,7 +94,7 @@ const login = async (req, res, next) => {
         accessToken,
         refreshToken,
         user: {
-          name: user.name,
+          name: user.name !== null ? user.name : user.email,
           email: user.email,
           avatarURL: user.avatarURL,
         },
@@ -194,7 +194,7 @@ const refreshToken = async (req, res) => {
       accessToken,
       refreshToken,
       user: {
-        name: user.name,
+        name: user.name !== null ? user.name : user.email,
         email: user.email,
         avatarURL: user.avatarURL,
       },
