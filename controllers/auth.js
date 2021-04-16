@@ -78,15 +78,15 @@ const login = async (req, res, next) => {
           : 'Email or password is wrong',
       })
     }
-    // const { accessToken, refreshToken } = createSessionTokens(user._id)
-    const newSession = await createSession(user._id)
-    const payload = { uid: user._id, sid: newSession._id }
-    const accessToken = jwt.sign(payload, SECRET_KEY, {
-      expiresIn: JWT_ACCESS_EXPIRE_TIME,
-    })
-    const refreshToken = jwt.sign(payload, SECRET_KEY, {
-      expiresIn: JWT_REFRESH_EXPIRE_TIME,
-    })
+    const { accessToken, refreshToken } = await createSessionTokens(user._id)
+    // const newSession = await createSession(user._id)
+    // const payload = { uid:user._id, sid: newSession._id }
+    // const accessToken = jwt.sign(payload, SECRET_KEY, {
+    //   expiresIn: JWT_ACCESS_EXPIRE_TIME,
+    // })
+    // const refreshToken = jwt.sign(payload, SECRET_KEY, {
+    //   expiresIn: JWT_REFRESH_EXPIRE_TIME,
+    // })
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,
@@ -174,7 +174,7 @@ const googleRedirect = async (req, res) => {
       `${process.env.FRONT_URL}/google-auth?token=${accessToken}&refreshToken=${refreshToken}&email=${email}&name=${name}&picture=${userPicture}`
     )
   }
-  const { accessToken, refreshToken } = createSessionTokens(user._id)
+  const { accessToken, refreshToken } = await createSessionTokens(user._id)
 
   const userPicture = user.avatarURL || picture
   return res.redirect(
@@ -185,7 +185,7 @@ const googleRedirect = async (req, res) => {
 const refreshToken = async (req, res) => {
   await deleteSession(req.user.sid)
   const user = req.user
-  const { accessToken, refreshToken } = createSessionTokens(user._id)
+  const { accessToken, refreshToken } = await createSessionTokens(user._id)
 
   return res.status(HttpCode.OK).json({
     status: 'success',
