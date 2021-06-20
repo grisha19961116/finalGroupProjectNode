@@ -87,6 +87,7 @@ const login = async (req, res, next) => {
     // const refreshToken = jwt.sign(payload, SECRET_KEY, {
     //   expiresIn: JWT_REFRESH_EXPIRE_TIME,
     // })
+    res.cookie('refreshToken', refreshToken, { httpOnly: true })
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,

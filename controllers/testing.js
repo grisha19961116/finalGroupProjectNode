@@ -17,7 +17,11 @@ const getTechQuestions = async (req, res, next) => {
 const getTheoryQuestions = async (req, res, next) => {
   try {
     const data = await listTheoryQuestions()
-    return res.json({ status: 'success', code: 200, data })
+    return res.json({
+      status: 'success',
+      code: 200,
+      data,
+    })
   } catch (e) {
     next(e)
   }
