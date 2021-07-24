@@ -2,21 +2,12 @@ const TechQuestion = require('./schemas/techQuestion')
 const TheoryQuestion = require('./schemas/theoryQuestion')
 const { questionsAmount } = require('./../helpers/constants')
 
-// const sampleAnswer = [
-//   { $sample: { size: questionsAmount } },
-//   { $project: { rightAnswer: 0 } },
-// ]
-
 const listTechQuestions = async () => {
   const questions = await TechQuestion.aggregate()
     .sample(questionsAmount)
     .project({
       rightAnswer: 0,
     })
-  // return questions.map((el) => {
-  //   delete el.rightAnswer
-  //   return el
-  // })
   return questions
 }
 
@@ -26,7 +17,6 @@ const listTheoryQuestions = async () => {
     .project({
       rightAnswer: 0,
     })
-  // const questions = (await TheoryQuestion.aggregate) / sampleAnswer //Старый вариант
   return questions
 }
 
